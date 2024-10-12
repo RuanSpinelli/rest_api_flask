@@ -6,10 +6,12 @@ app = Flask(__name__)
 #listinha com os desenvolvedores
 desenvolvedores = [
     {
+        "id": 0,
         "nome": "Rafael",
         "habilidades": ["python", "flask"]
      },
      {
+        'id': 1,
         "nome": "Daniel",
         "habilidades": ["C#", "SQLSERVER"]
      }
@@ -46,8 +48,25 @@ def desenvolvedor(id):
         desenvolvedores.pop(id)
         return jsonify({'status': "sucesso", "mensagem": "registro excluído"})
 
-
+#lista todos os desenvolvedores e inclui um novo desenvolvedor
+@app.route("/dev/", methods=["POST", "GET"])
 def lista_desenvolvedores():
+    if request.method =="POST":
+        dados = json.loads(request.data)
+        posicao = len(desenvolvedores)
+        desenvolvedores.append(dados)
+        dados['id'] = posicao
+
+        mensagem = "Desenvolvedor postado com sucesso!"  
+        return jsonify(desenvolvedores[posicao])
+    
+    elif request.method == "GET":
+        return jsonify(desenvolvedores)
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
