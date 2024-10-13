@@ -84,4 +84,4 @@ api.add_resource(ListarDesenvolvedores, "/dev/")
 
 #pra rodar a aplicação
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) #para que o aplicativo rode no modo debug
